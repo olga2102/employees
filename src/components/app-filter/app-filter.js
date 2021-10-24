@@ -1,22 +1,44 @@
 import "./app-filter.css"
 
-const AppFilter = () => {
+const AppFilter = (props) => {
+
+    const buttonsData = [
+        {name: 'all', label: 'Все сотрудники'},
+        {name: 'like', label: 'На повышение'},
+        {name: 'moreThen1000', label: 'З/п больше 1000$'},
+    ]
+
+    const buttons = buttonsData.map(({name, label}) => {
+        const active = props.filter === name;
+        const clazz = active ? 'btn-light' : 'btn-outline-light';
+        return (
+            <button
+            className={`btn ${clazz}`}
+            key={name}
+            onClick={() => props.onFilterSelect(name)}>
+                {label}
+            </button>
+        ) 
+    })
     return (
         <div className="btn-group">
-            <button
-            className="btn btn-light">
-                Все сотрудники
-            </button>
-            <button
-            className="btn btn-outline-light">
-                На повышение
-            </button>
-            <button
-            className="btn btn-outline-light">
-                З/п больше 1000$
-            </button>
+            {buttons}
         </div>
     )
 }
 
+let menu = {
+    width: 200,
+    height: 300,
+    title: "My menu"
+  };
+
+  let multiplyNumeric = (menu) => {
+      for (let key in menu) {
+          console.log(menu[key])
+            return menu[key] * 2;
+      }
+  }
+
+  multiplyNumeric(menu)
 export default AppFilter;
